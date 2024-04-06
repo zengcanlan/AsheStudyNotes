@@ -1,0 +1,172 @@
+/*会话层*/
+// 版本为0
+v=0
+// 所有者、ID、版本、internet、IPV4、地址
+o=- 843524311042569303 2 IN IP4 127.0.0.1
+// 会话名称-标识忽略
+s=-
+// 时间0 0 表示会话一直持续
+t=0 0
+// 将媒体流和视频流绑定到一个group,这样使用一个链路层来传输音视频
+a=group:BUNDLE 0 1
+a=extmap-allow-mixed
+// 媒体流标识, WMS:webrtcMediaStream
+a=msid-semantic: WMS zySCfDjrU1oA8A1Sw35YzIThzDLgldnmrWV5
+
+/* 媒体层*/
+// 媒体类型video,端口号9(9<1024表示无效端口,所有网络传输不使用SDP传输,而使用另外的网络去传输),
+// 传输协议是SRTP, SAVPF(security audio video protocol family)
+// payload type: 96 97 102 122 .....
+m=video 9 UDP/TLS/RTP/SAVPF 96 97 102 122 127 121 125 107 108 109 124 120 39 40 45 46 98 99 100 101 123 119 114 115 116
+// 连接信息,WEBRTC不使用这个信息,而是使用candidate
+c=IN IP4 0.0.0.0
+a=rtcp:9 IN IP4 0.0.0.0
+// 用于ice链路有效性检查和验证
+a=ice-ufrag:5FGc
+a=ice-pwd:PewgJmZkJ4IEiT9cUF6FEbSZ
+//表示调用setLocalDescription函数后开始收集candidate
+a=ice-options:trickle
+//256位哈希值,用于校验DTLS传输时检验证书的有效性 
+a=fingerprint:sha-256 A3:DC:00:F1:78:B2:E0:1A:E0:F8:01:45:06:AE:F4:5B:AA:64:FA:F9:2D:60:F1:08:57:86:D9:F7:1D:0E:ED:82
+//媒体协商过程中谁作为客户端, 谁作为服务端. actpass 既可以作为服务端也可以作为客户端,active客户端, passive服务端
+a=setup:actpass
+// 媒体id 0 音频
+a=mid:0
+.....
+// 媒体id 0 视频
+a=mid:1
+// 媒体流扩展属性
+a=extmap:14 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:2 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:13 urn:3gpp:video-orientation
+a=extmap:3 http://www.ietf.org/id/draft-holmer-rmcat-transport-wide-cc-extensions-01
+a=extmap:5 http://www.webrtc.org/experiments/rtp-hdrext/playout-delay
+a=extmap:6 http://www.webrtc.org/experiments/rtp-hdrext/video-content-type
+a=extmap:7 http://www.webrtc.org/experiments/rtp-hdrext/video-timing
+a=extmap:8 http://www.webrtc.org/experiments/rtp-hdrext/color-space
+a=extmap:4 urn:ietf:params:rtp-hdrext:sdes:mid
+a=extmap:10 urn:ietf:params:rtp-hdrext:sdes:rtp-stream-id
+a=extmap:11 urn:ietf:params:rtp-hdrext:sdes:repaired-rtp-stream-id
+// 表示流既可以发送也可以接受
+a=sendrecv
+a=msid:zySCfDjrU1oA8A1Sw35YzIThzDLgldnmrWV5 cc81232b-bb03-426e-ab31-4483dd816e03
+// rtp与RTCP复用同一个端口
+a=rtcp-mux
+// 告诉对方减少rtcp数据包
+a=rtcp-rsize
+// payload96 的编解码器是VP8,采样率是90000
+a=rtpmap:96 VP8/90000
+// 谷歌接收端96带宽评估
+a=rtcp-fb:96 goog-remb
+// 96传输端带宽评估
+a=rtcp-fb:96 transport-cc
+// 96 编码控制反馈消息
+a=rtcp-fb:96 ccm fir
+// 包应答
+a=rtcp-fb:96 nack
+// 与ccm fir类似,完全帧请求
+a=rtcp-fb:96 nack pli
+// 97为丢包重传通道
+a=rtpmap:97 rtx/90000
+// 表示97是96的重传
+a=fmtp:97 apt=96
+a=rtpmap:102 H264/90000
+a=rtcp-fb:102 goog-remb
+a=rtcp-fb:102 transport-cc
+a=rtcp-fb:102 ccm fir
+a=rtcp-fb:102 nack
+a=rtcp-fb:102 nack pli
+a=fmtp:102 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42001f
+a=rtpmap:122 rtx/90000
+a=fmtp:122 apt=102
+a=rtpmap:127 H264/90000
+a=rtcp-fb:127 goog-remb
+a=rtcp-fb:127 transport-cc
+a=rtcp-fb:127 ccm fir
+a=rtcp-fb:127 nack
+a=rtcp-fb:127 nack pli
+a=fmtp:127 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42001f
+a=rtpmap:121 rtx/90000
+a=fmtp:121 apt=127
+a=rtpmap:125 H264/90000
+a=rtcp-fb:125 goog-remb
+a=rtcp-fb:125 transport-cc
+a=rtcp-fb:125 ccm fir
+a=rtcp-fb:125 nack
+a=rtcp-fb:125 nack pli
+a=fmtp:125 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f
+a=rtpmap:107 rtx/90000
+a=fmtp:107 apt=125
+a=rtpmap:108 H264/90000
+a=rtcp-fb:108 goog-remb
+a=rtcp-fb:108 transport-cc
+a=rtcp-fb:108 ccm fir
+a=rtcp-fb:108 nack
+a=rtcp-fb:108 nack pli
+a=fmtp:108 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=42e01f
+a=rtpmap:109 rtx/90000
+a=fmtp:109 apt=108
+a=rtpmap:124 H264/90000
+a=rtcp-fb:124 goog-remb
+a=rtcp-fb:124 transport-cc
+a=rtcp-fb:124 ccm fir
+a=rtcp-fb:124 nack
+a=rtcp-fb:124 nack pli
+a=fmtp:124 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=4d001f
+a=rtpmap:120 rtx/90000
+a=fmtp:120 apt=124
+a=rtpmap:39 H264/90000
+a=rtcp-fb:39 goog-remb
+a=rtcp-fb:39 transport-cc
+a=rtcp-fb:39 ccm fir
+a=rtcp-fb:39 nack
+a=rtcp-fb:39 nack pli
+a=fmtp:39 level-asymmetry-allowed=1;packetization-mode=0;profile-level-id=4d001f
+a=rtpmap:40 rtx/90000
+a=fmtp:40 apt=39
+a=rtpmap:45 AV1/90000
+a=rtcp-fb:45 goog-remb
+a=rtcp-fb:45 transport-cc
+a=rtcp-fb:45 ccm fir
+a=rtcp-fb:45 nack
+a=rtcp-fb:45 nack pli
+a=rtpmap:46 rtx/90000
+a=fmtp:46 apt=45
+a=rtpmap:98 VP9/90000
+a=rtcp-fb:98 goog-remb
+a=rtcp-fb:98 transport-cc
+a=rtcp-fb:98 ccm fir
+a=rtcp-fb:98 nack
+a=rtcp-fb:98 nack pli
+a=fmtp:98 profile-id=0
+a=rtpmap:99 rtx/90000
+a=fmtp:99 apt=98
+a=rtpmap:100 VP9/90000
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=fmtp:100 profile-id=2
+a=rtpmap:101 rtx/90000
+a=fmtp:101 apt=100
+a=rtpmap:123 H264/90000
+a=rtcp-fb:123 goog-remb
+a=rtcp-fb:123 transport-cc
+a=rtcp-fb:123 ccm fir
+a=rtcp-fb:123 nack
+a=rtcp-fb:123 nack pli
+a=fmtp:123 level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=64001f
+a=rtpmap:119 rtx/90000
+a=fmtp:119 apt=123
+// 指定重传的策略
+a=rtpmap:114 red/90000
+a=rtpmap:115 rtx/90000
+a=fmtp:115 apt=114
+a=rtpmap:116 ulpfec/90000
+// 标识媒体流的源, ssrc和cname是绑定关系 
+a=ssrc-group:FID 4066089177 2080531230
+a=ssrc:4066089177 cname:23anS3tmicYAQlGN
+a=ssrc:4066089177 msid:zySCfDjrU1oA8A1Sw35YzIThzDLgldnmrWV5 cc81232b-bb03-426e-ab31-4483dd816e03
+a=ssrc:2080531230 cname:23anS3tmicYAQlGN
+a=ssrc:2080531230 msid:zySCfDjrU1oA8A1Sw35YzIThzDLgldnmrWV5 cc81232b-bb03-426e-ab31-4483dd816e03

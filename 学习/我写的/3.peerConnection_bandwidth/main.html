@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title>webrtc 1V1音视频互通测试</title>
+</head>
+
+<body>
+    <div>
+        <label>"本地视频流"</label>
+        <br>
+        <video id="localVideo" controls autoplay playsinline width="320" height="240"></video>
+        <br>
+        <label>"远程视频流"</label>
+        <br>
+        <video id="remoteVideo" controls autoplay playsinline  width="320" height="240"></video>
+    </div>
+    <br>
+    <div>
+        <button id="buttonStart">start</button>
+        <button id="buttonCall">call</button>
+        <button id="buttonHangUp">HangUp</button>
+    </div>
+    <br>
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
